@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- j-query -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    
+    
+     
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header .right-section button {
+            background: transparent;
+            color: #ffffff;
+            padding: 4px 2px;
+            border: 1px solid rgb(153, 255, 0);
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+
+        }
+
+        header .right-section button:hover {
+            background-color: rgb(153, 255, 0);
+            border: #fff 1px solid;
+            color: black;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1,
+        h3 {
+            color: rgb(153, 255, 0);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 3rem;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+        }
+
+        h2 {
+            border-bottom: 2px solid rgb(153, 255, 0);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 25px;
+        }
+
+        .header {
+            text-align: right;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .icon {
+            color: rgb(153, 255, 0);
+
+        }
+
+        .header .contact-info p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+        }
+
+        .work-experience div,
+        .education div,
+        .certifications div,
+        .projects div {
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            margin-left: 20px;
+            font-size: 1rem;
+        }
+
+        /* Skills section */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .skills ul {
+            list-style: none;
+            padding-left: 0;
+            width: 48%;
+        }
+
+        .skills ul li {
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: white;
+        }
+
+        /* Contact Form
+        .contact-form {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+        }
+
+        .contact-form label {
+            color: #00ff99;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .contact-form button {
+            background-color: #00ff99;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #00cc77;
+        }
+ */
+
+        /* Hide the contact form when printing */
+        @media print {
+
+            /* .contact-form {
+                display: none;
+            } */
+            header {
+                display: none;
+            }
+            .footer{
+                display: none;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .skills ul {
+                width: 100%;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 520px) {
+            h1 {
+                font-size: 1.8rem;
+                text-align: left !important;
+            }
+
+            h2,
+            p {
+                font-size: 1.5rem;
+
+            }
+
+            .header {
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                justify-content: left;
+                align-items: left;
+                margin-bottom: 10px;
+            }
+        }
+
+        .card-info {
+            display: flex;
+            padding: 10px;
+
+        }
+
+        .links:hover{
+            text-decoration: underline !important;
+        }
+
+/* up arrow */
+#up {
+  height: 3em;
+  width: 3em;
+  background-color: #111;
+  box-shadow: 0px 0px 30px 2px #11111197;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 45px;
+  position: fixed;
+  bottom: 6%;
+  right: 2%;
+  z-index: 999 !important;
+  border: 2px solid rgb(153, 255, 0);
+
+
+}
+
+#up i {
+  font-size: 2rem;
+  color: #fff;
+  animation: arrow 1s infinite;
+  scroll-behavior: smooth;
+
+}
+
+@keyframes arrow {
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+
+.footer {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer .social-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer .social-icons a {
+            text-decoration: none;
+            font-size: 2rem;
+            color: rgb(153, 255, 0);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .footer .social-icons a:hover {
+            color: black;
+            transform: scale(1.2);
+        }
+
+        .footer p {
+            color: white;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <a style="text-decoration: none; color:white ; font-size: 15px; font-weight: bold;" href="./index.html"> ←
+            Portfolio</a>
+        <div class="right-section">
+            <a href="./My Resume.pdf" download="Resume">
+                <button class="hero-btn">
+                    <i class="fas fa-download"></i>Download</button>
+            </a>
+            <button onclick="window.print()">
+                <i class="fas fa-print"></i> Print Resume
+            </button>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Abdullah Khan</h1>
+            <!-- <div class="right-section">
+            <button onclick="window.print()">
+                <i class="fas fa-print"></i> Print Resume
+            </button>
+        </div> -->
+            <div class="contact-info">
+                <p><i class="fas icon fa-phone"></i><a class="links" style="text-decoration: none; color: white;"
+                        href="https://api.whatsapp.com/send/?phone=923331279569" target="_blank">+923331279569</a></p>
+                <p><i class="fas icon fa-map-marker-alt"></i> <a class="links" style="text-decoration: none; color: white;"
+                        href="https://www.google.com/maps/place/Nazimabad,+Karachi,+Karachi+City,+Sindh,+Pakistan/@24.9152668,67.0120113,14z/data=!3m1!4b1!4m6!3m5!1s0x3eb33fbd469d9bcd:0x749325c6e39952f3!8m2!3d24.910688!4d67.0310973!16zL20vMDh0Ymh2?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank">Nazimabad, Karachi</a></p>
+                <p><i class="fas icon fa-envelope"></i> <a class="links" style="text-decoration: none; color: white;"
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=kkabdullah24@gmail.com&su=Hello&body=This%20is%20the%20message" target="_blank">
+                        kkabdullah24@gmail.com</a>
+                </p>
+
+            </div>
+        </div>
+
+        <!-- Work Experience Section -->
+        <div class="section">
+            <h2>Work Experience</h2>
+            <div class="card">
+                <h3>Surveillance Officer / Data Entry - Break Time Corner Market</h3>
+                <p><strong>January 2022 - August 2022</strong></p>
+                <p>Overseeing surveillance operations, monitoring activities, preparing reports, and managing data entry for parcel tracking and personnel records.</p>
+            </div>
+            <div class="card">
+                <h3>Content Writer / Social Media Manager - Tree House Production</h3>
+                <p><strong>January 2020 - July 2020</strong></p>
+                <p>Managed content creation, page administration, and executed social media marketing strategies.</p>
+                <!-- <p><strong>Reference: </strong>SAMI KHAN (0300-3782101)</p> -->
+            </div>
+            <div class="card">
+                <h3>Admin Assistant / Office Work - Vector Coaching & Computer Center</h3>
+                <p><strong>August 2016 - December 2018</strong></p>
+                <p>Managed public relations, coordinated events, and oversaw office administration tasks.</p>
+                <!-- <p><strong>Reference: </strong>IRFAN AZIM KHAN (0300-9226638)</p> -->
+            </div>
+            <div class="card">
+                <h3>Sales Executive - SUENOS / HELLO / NEXUS - International Marketing</h3>
+                <p><strong>March 2018 - October 2020</strong></p>
+                <p> <strong>SUENOS -</strong>  Handled live calls for booking Duct Cleaning services. <br><strong>HELLO -</strong> Supervised live call bookings for Duct Cleaning services. <br><strong>NEXUS -</strong> Generated sales leads through live calls for braces and body corsets aimed at pain relief.</p>
+            </div>
+            
+            <!-- add here for more -->
+
+            <!-- <div class="card">
+                <h3>Sales Executive / Supervisor - HELLO International Marketing</h3>
+                <p><strong>January 2019 - April 2019</strong></p>
+                <p>Supervised sales and handled bookings for Duct Cleaning services.</p>
+            </div>
+            <div class="card">
+                <h3>Sales Executive - Nexus BPO Solution</h3>
+                <p><strong>April 2018 - August 2018</strong></p>
+                <p>Generated leads through sales of braces and body corsets for pain relief.</p>
+            </div> -->
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section">
+            <h2>Projects</h2>
+
+            <div class="card">
+                <h3>Portfolio Website - Frontend Website</h3>
+                <p>Developed a fully responsive personal portfolio showcasing web development skills.<a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="./index.html" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>Art By Fatima - Frontend Website</h3>
+                <p>One-page responsive website featuring dark mode, an add-to-cart function, and WhatsApp and Instagram buttons for direct orders, with different sections designed for better user experience. I created this using HTML, CSS, and JS. <a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://kkabdull247.github.io/art/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>AZ FIT - Frontend Website</h3>
+                <p>This website includes a hero section, product cards with an 'add to cart' function, a marquee element, API integration, an ad, and a loader. Finally, there is a contact page at the end. I created these using HTML, CSS, JS, and Bootstrap. <a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://az-fit.vercel.app/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>Whatever Collection - Frontend Website</h3>
+                <p>On this platform, I focused on creating collection pages, a product comparison page, and login/signup pages for designers' products, among other features. I created these using HTML, CSS, JS, and Bootstrap. <a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://kkabdull247.github.io/Whatever-Collection/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>AK247 Clothing - Frontend Website</h3>
+                <p>This website includes bootstrap hero section, product cards with an 'add to cart' function, a marquee element, and a dark mode feature. Finally, there is a contact page at the end.<a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://kkabdull247.github.io/AK247-Collections/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>Covid Testing - Backend Website</h3>
+                <p>This COVID testing system, built with PHP and MySQL, enables appointment booking and result tracking between hospitals and patients. I focused on frontend development, creating a responsive, user-friendly interface. <a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://covidtestingsystem.free.nf/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>Service Hub - Backend website</h3>
+                <p>A platform for seamless service bookings with secure login and responsive design. Built with PHP and MySQL, I focused on frontend development to create a user-friendly, responsive interface. <a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://servicehub.000.pe/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>Alpha Store - Backend Website</h3>
+                <p>This e-commerce site features dynamic listings, checkout, and order history, built with PHP and MySQL. I handled the frontend, creating a responsive and user-friendly interface. <a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://azstore.free.nf/" target="_blank">Live View</a></p>
+            </div>
+            <div class="card">
+                <h3>Snake Game - Frontend Website</h3>
+                <p>A classic Snake game built with JavaScript, featuring smooth controls, responsive design, score tracking, and a "Game Over" modal. I focused on game logic, animations, and enhancing user experience with JavaScript and CSS, with guidance from online resources.<a   style="color: rgb(153, 255, 0); text-decoration: none;"  href="https://kkabdull247.github.io/snake2/" target="_blank">Live View</a></p>
+            </div>
+
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="section">
+            <h2>Certifications</h2>
+            <div class="card">
+                <h3>ACCP Prime 2.0 (In Process)</h3>
+                <p>Aptech Learning Pakistan - Currently in 3rd Semester.</p>
+            </div>
+            <div class="card">
+                <h3>English Language</h3>
+                <p>Pak British Institute</p>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+            <h2>Education</h2>
+            <div class="card">
+                <h3>Cost & Management Accounting OL-2 (In Process)</h3>
+                <p>ICMA International <br>
+                    Paused studies temporarily, with plans to resume in the future.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Intermediate in Pre-Engineering</h3>
+                <p><strong>2017 - 2019</strong></p>
+                <p>Govt. Jinnah College, Karachi</p>
+            </div>
+            <div class="card">
+                <h3>High School in Science</h3>
+                <p><strong>2006 - 2016</strong></p>
+                <p>The Fatima School, Karachi</p>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="card skills">
+                <ul>
+                    <li>Web Development</li>
+                    <li>Content Writing</li>
+                    <li>Social Media Marketing</li>
+                    <li>Sales Expertise</li>
+                    <li>Public Dealing</li>
+                </ul>
+                <ul>
+                    <li>Video Editing</li>
+                    <li>Microsoft Office</li>
+                    <li>Editing</li>
+                    <li>Web Browsing</li>
+                    <li>Surveillance Monitoring</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Personal Information Section -->
+        <div class="section personal-info">
+            <h2>Personal Information</h2>
+            <div class="card  card-info">
+                <h3>Father's Name:</h3>
+                <p> Muhammad Aslam Khan</p>
+            </div>
+            <div class="card  card-info">
+                <h3>Religion:</h3>
+                <p> Islam</p>
+            </div>
+            <div class="card  card-info">
+                <h3>Nationality:</h3>
+                <p> Pakistani</p>
+            </div>
+            <div class="card  card-info">
+                <h3>Languages:</h3>
+                <p> Urdu, English</p>
+            </div>
+            <div class="card  card-info">
+                <h3>CNIC:</h3>
+                <p>42101-5047587-1</p>
+            </div>
+        </div>
+    </div>
+ <!-- aroow up -->
+ <a href="#">
+    <div id="up">
+        <i style="color: rgb(255, 255, 255);" class="fa-solid fa-arrow-up"></i>
+    </div>
+</a>
+ <!-- Footer Section -->
+ <footer class="footer">
+    <div class="social-icons">
+        <a href="https://www.facebook.com/kkabdull247" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/kkabdull247" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@kkabdull247" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://github.com/kkabdull247" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/abdullah-khan-258504253/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://wa.me/03331279569" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p>© 2024 Abdullah Khan. All rights reserved.</p>
+</footer>
+
+
+    <!-- Contact Form Section (Hidden when printing) -->
+    <!-- <div class="section contact-form">
+        <h2>Contact Me</h2>
+        <form action="https://formsubmit.co/kkabdull98@gmail.com" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+    </div> -->
+
+    <!-- JavaScript to trigger printing -->
+    <script>
+        function printResume() {
+            window.print();
+        }
+
+
+        window.addEventListener("scroll", () => {
+    let verticalScrollpx = window.scrollY || window.pageYOffset
+    let arrow = document.getElementById('up')
+
+    if (verticalScrollpx < 100) {
+        arrow.style.display = "none"
+    }
+
+
+    if (verticalScrollpx < 1600 && verticalScrollpx > 100) {
+        // if(cardprod.length <7 ){
+        arrow.style.display = "flex";
+    }
+})
+    </script>
+</body>
+
+</html>
