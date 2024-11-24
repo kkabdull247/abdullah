@@ -102,37 +102,56 @@ window.addEventListener("scroll", () => {
 })
 
 // cursor mover
+const cursor = document.getElementById("cursor");
+let links = document.querySelectorAll("a"); // Get all links
 
-let body = document.getElementById("body");
-let cursor = document.getElementById("cursor");
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
 
+// Set speed of cursor movement (lower number = smoother, higher number = faster)
+const speed = 8; // You can adjust this number to control the speed
 
-body.addEventListener("mousemove", function (cur) {
-    gsap.to(cursor, {
-        x: cur.x,
-        y: cur.y
-    })
-})
+// Smooth follow cursor movement
+const smoothCursor = () => {
+  cursorX += (mouseX - cursorX) / speed; // Adjust speed here
+  cursorY += (mouseY - cursorY) / speed;
 
-let projectone = document.querySelector(".project-one");
-let projecttwo = document.querySelector(".project-two");
+  cursor.style.transform = `translate(${cursorX - cursor.offsetWidth / 2}px, ${cursorY - cursor.offsetHeight / 2}px)`;
 
-projectone.addEventListener("mouseenter", () => {
-    cursor.style.display = "none"
-})
+  requestAnimationFrame(smoothCursor); // Repeatedly call the function for smoothness
+};
 
-projectone.addEventListener("mouseleave", () => {
-    cursor.style.display = "block"
-})
+// Track mouse movement
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
 
-projecttwo.addEventListener("mouseenter", () => {
-    cursor.style.display = "none"
-})
+// Initiate smooth cursor movement
+smoothCursor();
 
-projecttwo.addEventListener("mouseleave", () => {
-    cursor.style.display = "block"
-})
+// When hovering over a link, change cursor's appearance
+links.forEach(link => {
+  link.addEventListener('mouseenter', () => {
+    cursor.style.backgroundColor = 'rgb(153, 255, 0)';  // Set cursor color to RGB value
+    cursor.style.transform = 'scale(1.5)';  // Scale up cursor
+    cursor.style.width = '80px';
+    cursor.style.borderBottom = '5px solid white';
+    cursor.style.height = '80px';
+    cursor.style.boxShadow = '0 0 20px rgba(153, 255, 0, 0.8), 0 0 40px rgba(153, 255, 0, 0.5)';
+  });
 
+  link.addEventListener('mouseleave', () => {
+    cursor.style.backgroundColor = 'rgb(153, 255, 0)';  // Revert to RGB color
+    cursor.style.transform = 'scale(1)';  // Revert size
+    cursor.style.border = 'none';
+    cursor.style.width = '50px';
+    cursor.style.height = '50px';
+    cursor.style.boxShadow = '0 0 10px rgba(153, 255, 0, 0.7), 0 0 20px rgba(153, 255, 0, 0.5)';
+  });
+});
 
 // GSAP animation for H2 hero
 const words = ["Front-end Developer", "Designer", "Video Editor", "Content Creator"];
