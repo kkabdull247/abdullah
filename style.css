@@ -785,6 +785,8 @@ h2{
   text-align: center;
   color: rgb(255, 255, 255) !important;
   font-size: 1.5rem;
+  padding: 20px;
+
 }
 
 /* Hover Effect: slide the overlay from left to right */
